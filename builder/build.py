@@ -199,8 +199,51 @@ def build_bundle(
 
     # Generate Merkle proofs for all records
     print(f"📝 Generating Merkle proofs...")
-    from .generate_proofs import generate_proofs_for_bundle
-    generate_proofs_for_bundle(str(bundle_dir))
+    from .merkle import MerkleTree
+
+    # Build Merkle tree with proof support
+    tree = MerkleTree(leaves)
+
+    # Verify root matches
+    if tree.root != root:
+        raise ValueError(f"MerkleTree root mismatch: {tree.root} vs {root}")
+
+    # Generate proofs
+    proofs_dir = bundle_dir / "proofs"
+    proofs_dir.mkdir(exist_ok=True)
+
+    proof_metadata = []
+
+    for idx in range(len(leaves)):
+        proof_data = tree.generate_proof(idx)
+
+        # Save individual proof
+        proof_file = proofs_dir / f"{idx}.json"
+        with open(proof_file, 'w') as f:
+            f.write(json.dumps(proof_data, indent=2))
+
+        proof_metadata.append({
+            "record_index": idx,
+            "proof_file": f"proofs/{idx}.json",
+            "leaf_hash": proof_data["leaf_hash"]
+        })
+
+        if (idx + 1) % 100 == 0:
+            print(f"   Generated {idx + 1}/{len(leaves)} proofs...")
+
+    # Save proof index
+    proof_index_file = bundle_dir / "proof_index.json"
+    with open(proof_index_file, 'w') as f:
+        json.dump({
+            "version": "1",
+            "total_records": len(leaves),
+            "merkle_root": tree.root,
+            "proofs": proof_metadata
+        }, f, indent=2)
+
+    print(f"✅ Generated {len(leaves)} proofs")
+    print(f"📁 Proof index: {proof_index_file}")
+    print(f"📁 Proofs directory: {proofs_dir}")
 
     return {
         "date": date,

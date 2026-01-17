@@ -7,7 +7,28 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Any
 
-from .merkle import MerkleTree, verify_proof
+from .merkle import MerkleTree, verify_proof, compute_leaf
+
+
+def _get_deterministic_json():
+    """Lazy import of deterministic_json."""
+    import sys
+    from pathlib import Path
+    # Try to find ledger-spec
+    possible_paths = [
+        Path.cwd().parent.parent / "ledger-spec",  # If running from ledger-publisher
+        Path(__file__).parent.parent.parent.parent / "ledger-spec",  # If running from builder/
+    ]
+    for spec_path in possible_paths:
+        if spec_path.exists():
+            sys.path.insert(0, str(spec_path))
+            try:
+                from reference_impl import deterministic_json
+                return deterministic_json
+            except ImportError:
+                continue
+    # Fallback
+    raise ImportError("Cannot find ledger-spec module")
 
 
 def generate_proofs_for_bundle(bundle_dir: str) -> None:
@@ -47,9 +68,7 @@ def generate_proofs_for_bundle(bundle_dir: str) -> None:
                     record_data.append(record)
 
                     # Compute leaf hash from canonical bytes
-                    from .merkle import compute_leaf
-                    from ledger_spec.reference_impl import deterministic_json
-
+                    deterministic_json = _get_deterministic_json()
                     canonical = deterministic_json(record)
                     leaf_hash = compute_leaf(canonical)
                     leaves.append(leaf_hash)

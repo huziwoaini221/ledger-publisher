@@ -1,0 +1,29 @@
+{
+  "version": "1",
+  "date": "2026-01-18",
+  "files": [
+    {
+      "path": "core_spec.json",
+      "sha256": "e7a20ddb4b2454ee8079ce428a4ee0a0a5d49a7c3aff7340433f0069758a821b",
+      "size": 224
+    },
+    {
+      "path": "daily_root.txt",
+      "sha256": "19e52da298f2b66399d40b1ccc7c1e8dd5e19df9c313bc569810cc6f9abb8a62",
+      "size": 65
+    },
+    {
+      "path": "profile.json",
+      "sha256": "8a43de6d40cbeb83a5743949bce6dd34e547663986929088813c26c13654d8ad",
+      "size": 103
+    },
+    {
+      "path": "records-000.jsonl",
+      "sha256": "eb7793356bc88113781c8f4ace7196ac53ca07e3460cc8c7ed90ab1e61f74c6e",
+      "size": 3689
+    }
+  ],
+  "core_spec_sha256": "...",
+  "profile_sha256": "...",
+  "daily_root_sha256": "f7596ef80138d6f51301ba39dabce42150fe023eeed05426578f094f6a7ceb3f"
+}

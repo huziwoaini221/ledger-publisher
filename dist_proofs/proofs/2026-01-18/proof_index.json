@@ -1,0 +1,57 @@
+{
+  "version": "1",
+  "total_records": 10,
+  "merkle_root": "f7596ef80138d6f51301ba39dabce42150fe023eeed05426578f094f6a7ceb3f",
+  "proofs": [
+    {
+      "record_index": 0,
+      "proof_file": "proofs/0.json",
+      "leaf_hash": "e7de8d8316d9e1fa187a98789b9d0489c64aa56eff3b3be6141879e6690959fe"
+    },
+    {
+      "record_index": 1,
+      "proof_file": "proofs/1.json",
+      "leaf_hash": "2e19cd839fb4c52c1d7a172677a0529009256fd52c466e92df42448d28c63f42"
+    },
+    {
+      "record_index": 2,
+      "proof_file": "proofs/2.json",
+      "leaf_hash": "03010e8d1fc5d40f75d8aa3630a37f302606a896c99948ddc5df1cf8a0c1e3a6"
+    },
+    {
+      "record_index": 3,
+      "proof_file": "proofs/3.json",
+      "leaf_hash": "0b75bf9d8dd0c310b65c223c2e21b8a189f1dcd137780e4d959e66cf34f01b7f"
+    },
+    {
+      "record_index": 4,
+      "proof_file": "proofs/4.json",
+      "leaf_hash": "9a7e2ef4b38e444faa3401828be84ce6f2817770db7b3f621877d46bb9db1500"
+    },
+    {
+      "record_index": 5,
+      "proof_file": "proofs/5.json",
+      "leaf_hash": "ef4116a76b1ae50f9743ed5e60af89976aadd71019f093856073504a528db2fa"
+    },
+    {
+      "record_index": 6,
+      "proof_file": "proofs/6.json",
+      "leaf_hash": "23f0c67b10e44bc7057839a82cb5981343e8d8f82ed28ca7b1b544be0f091481"
+    },
+    {
+      "record_index": 7,
+      "proof_file": "proofs/7.json",
+      "leaf_hash": "6964d9b9ed00ae0271de2a9c68b6b1e7f5b45f3a2d505a99d50919390018a8bd"
+    },
+    {
+      "record_index": 8,
+      "proof_file": "proofs/8.json",
+      "leaf_hash": "61a00d75244a39258d3d272eb8144380bd08c4367c4ab8f27d0a15e398e58ff5"
+    },
+    {
+      "record_index": 9,
+      "proof_file": "proofs/9.json",
+      "leaf_hash": "60a87a47306e493c1900fb0b6807b7890e4a1dea6a6964350a860edcef8c69d1"
+    }
+  ]
+}

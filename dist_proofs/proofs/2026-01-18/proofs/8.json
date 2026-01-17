@@ -1,0 +1,23 @@
+{
+  "leaf_index": 8,
+  "leaf_hash": "61a00d75244a39258d3d272eb8144380bd08c4367c4ab8f27d0a15e398e58ff5",
+  "proof": [
+    {
+      "direction": "left",
+      "sibling_hash": "60a87a47306e493c1900fb0b6807b7890e4a1dea6a6964350a860edcef8c69d1"
+    },
+    {
+      "direction": "left",
+      "sibling_hash": "315200fce7f835b4b0677f280770dde76f50927cff417933883a835c537c4d6a"
+    },
+    {
+      "direction": "left",
+      "sibling_hash": "dd501cbba77530233429738da8f9d6e6bc628dd0af30ae32d27e835e5cd70173"
+    },
+    {
+      "direction": "right",
+      "sibling_hash": "3aa6a69565683d50b264e26903a11f93f84227f622ab5bc12ed717389bfabfb5"
+    }
+  ],
+  "expected_root": "f7596ef80138d6f51301ba39dabce42150fe023eeed05426578f094f6a7ceb3f"
+}
