@@ -56,6 +56,34 @@ jobs:
             --bundle-dir dist/proofs/${{ steps.date.outputs.date }} \
             --remote-url https://huziwoaini221.github.io/ledger-publisher
 
+      - name: Create index.html
+        run: |
+          cat > dist/proofs/index.html << 'HTMLINDEX'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Verifiable Transparent Ledger</title>
+            <style>
+              body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+              h1 { color: #333; }
+              .bundle { margin: 20px 0; padding: 15px; background: #f5f5f5; border-radius: 5px; }
+              a { color: #0366d6; text-decoration: none; }
+              a:hover { text-decoration: underline; }
+            </style>
+          </head>
+          <body>
+            <h1>Verifiable Transparent Ledger - Publisher</h1>
+            <p>This repository contains published proof bundles for the verifiable transparent ledger platform.</p>
+            <div class="bundle">
+              <h2>Latest Bundle</h2>
+              <p><strong>Date:</strong> ${{ steps.date.outputs.date }}</p>
+              <p><a href="${{ steps.date.outputs.date }}/manifest.json">View Manifest</a></p>
+              <p><a href="${{ steps.date.outputs.date }}/">Browse Bundle Files</a></p>
+            </div>
+          </body>
+          </html>
+          HTMLINDEX
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
