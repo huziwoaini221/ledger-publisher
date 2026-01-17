@@ -47,7 +47,7 @@ jobs:
         run: |
           python -m builder.append_only_guard \
             --bundle-dir dist/proofs/${{ steps.date.outputs.date }} \
-            --remote-url https://your-org.github.io/ledger-publisher
+            --remote-url https://huziwoaini221.github.io/ledger-publisher
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -61,4 +61,4 @@ jobs:
         run: |
           echo "✅ Bundle published successfully!"
           echo "   Date: ${{ steps.date.outputs.date }}"
-          echo "   URL: https://your-org.github.io/ledger-publisher/proofs/${{ steps.date.outputs.date }}/"
+          echo "   URL: https://huziwoaini221.github.io/ledger-publisher/proofs/${{ steps.date.outputs.date }}/"
