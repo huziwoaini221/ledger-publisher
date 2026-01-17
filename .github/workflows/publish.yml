@@ -1,0 +1,64 @@
+name: Publish Daily Bundle
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 每天 01:00 UTC 运行
+  workflow_dispatch:      # 支持手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - name: Generate sample records (demo)
+        run: |
+          python -m adapters.domain_onchain_payments.export sample \
+            --output records.jsonl \
+            --count 100
+
+      - name: Build bundle
+        run: |
+          python -m builder.build \
+            --input records.jsonl \
+            --profile-dir ../ledger-spec/profiles \
+            --profile domain-onchain-payments \
+            --date ${{ steps.date.outputs.date }} \
+            --output dist/
+
+      - name: Append-only guard check
+        run: |
+          python -m builder.append_only_guard \
+            --bundle-dir dist/proofs/${{ steps.date.outputs.date }} \
+            --remote-url https://your-org.github.io/ledger-publisher
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/proofs
+          publish_branch: gh-pages
+          force_orphan: false
+
+      - name: Summary
+        run: |
+          echo "✅ Bundle published successfully!"
+          echo "   Date: ${{ steps.date.outputs.date }}"
+          echo "   URL: https://your-org.github.io/ledger-publisher/proofs/${{ steps.date.outputs.date }}/"

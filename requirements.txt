@@ -1,0 +1,9 @@
+# ledger-publisher requirements
+
+# No external dependencies for core functionality
+# (uses Python standard library only)
+
+# Optional: for development
+# pytest>=7.0.0
+# black>=22.0.0
+# mypy>=1.0.0
