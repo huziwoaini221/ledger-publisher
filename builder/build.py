@@ -197,6 +197,11 @@ def build_bundle(
     checkpoint_file = bundle_dir / "checkpoint.json"
     checkpoint_file.write_text(json.dumps(checkpoint, indent=2) + '\n', encoding='utf-8')
 
+    # Generate Merkle proofs for all records
+    print(f"📝 Generating Merkle proofs...")
+    from .generate_proofs import generate_proofs_for_bundle
+    generate_proofs_for_bundle(str(bundle_dir))
+
     return {
         "date": date,
         "records_count": len(sorted_records),
